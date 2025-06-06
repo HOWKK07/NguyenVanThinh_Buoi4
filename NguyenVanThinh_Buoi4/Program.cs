@@ -37,10 +37,12 @@ if (!app.Environment.IsDevelopment())
 app.UseStaticFiles();
 app.UseRouting();
 
-app.UseAuthentication(); // Cần có dòng này!
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapRazorPages();
+
+// SỬA: Đảm bảo routing cho Areas được ưu tiên
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Product}/{action=Index}/{id?}");
