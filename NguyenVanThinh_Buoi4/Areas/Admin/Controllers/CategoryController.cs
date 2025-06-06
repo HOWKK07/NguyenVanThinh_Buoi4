@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using NguyenVanThinh_Buoi4.Models;
 using NguyenVanThinh_Buoi4.Repositories;
 using System.Threading.Tasks;
 
 namespace NguyenVanThinh_Buoi4.Areas.Admin.Controllers
 {
+    [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)] // Yêu cầu quyền Admin
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _categoryRepository;
