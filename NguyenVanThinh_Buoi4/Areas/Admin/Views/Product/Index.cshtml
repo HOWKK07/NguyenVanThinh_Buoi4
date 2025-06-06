@@ -45,18 +45,18 @@
                                         }
                                     </td>
                                     <td>
-                                        <a href="@Url.Action("Display", "Product", new { area = "Admin", id = product.Id })"
-                                           class="btn btn-info btn-sm rounded-pill shadow-sm me-1"
+                                        <a href="@Url.Action("Display", "Product", new { area = "Admin", id = product.Id })" 
+                                           class="btn btn-info btn-sm rounded-pill shadow-sm me-1" 
                                            title="Xem chi tiết">
                                             <i class="bi bi-eye"></i> Xem
                                         </a>
-                                        <a href="@Url.Action("Update", "Product", new { area = "Admin", id = product.Id })"
-                                           class="btn btn-warning btn-sm rounded-pill shadow-sm me-1"
+                                        <a href="@Url.Action("Update", "Product", new { area = "Admin", id = product.Id })" 
+                                           class="btn btn-warning btn-sm rounded-pill shadow-sm me-1" 
                                            title="Sửa sản phẩm">
                                             <i class="bi bi-pencil"></i> Sửa
                                         </a>
-                                        <a href="@Url.Action("Delete", "Product", new { area = "Admin", id = product.Id })"
-                                           class="btn btn-danger btn-sm rounded-pill shadow-sm"
+                                        <a href="@Url.Action("Delete", "Product", new { area = "Admin", id = product.Id })" 
+                                           class="btn btn-danger btn-sm rounded-pill shadow-sm" 
                                            title="Xóa sản phẩm">
                                             <i class="bi bi-trash"></i> Xóa
                                         </a>
@@ -76,7 +76,7 @@
         // Debug: Kiểm tra xem các link có hoạt động không
         $(document).ready(function() {
             console.log('Admin Product Index loaded');
-
+            
             // Test click events
             $('a[href*="/Admin/Product/"]').on('click', function(e) {
                 console.log('Clicking link:', this.href);

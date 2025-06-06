@@ -67,15 +67,17 @@ namespace NguyenVanThinh_Buoi4.Areas.Admin.Controllers
         }
 
         // Hiển thị form cập nhật sản phẩm
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(int? id)
         {
-            var product = await _productRepository.GetByIdAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
+
+            var product = await _productRepository.GetByIdAsync(id.Value);
+            if (product == null) return NotFound();
+
+            // Lấy danh sách category cho dropdown
             var categories = await _categoryRepository.GetAllAsync();
             ViewBag.Categories = new SelectList(categories, "Id", "Name", product.CategoryId);
+
             return View(product);
         }
 
