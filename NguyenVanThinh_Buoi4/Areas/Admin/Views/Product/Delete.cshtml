@@ -20,11 +20,11 @@
                     <dt class="col-sm-4">Mô tả</dt>
                     <dd class="col-sm-8">@Model.Description</dd>
                 </dl>
-                <form asp-action="DeleteConfirmed" method="post">
+                <form asp-area="Admin" asp-controller="Product" asp-action="DeleteConfirmed" method="post">
                     <input type="hidden" asp-for="Id" />
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-danger rounded-pill px-4 shadow-sm">Xóa</button>
-                        <a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4 shadow-sm">Quay lại</a>
+                        <a asp-area="Admin" asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4 shadow-sm">Quay lại</a>
                     </div>
                 </form>
             </div>
