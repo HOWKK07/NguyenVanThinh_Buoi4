@@ -7,10 +7,10 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
-namespace NguyenVanThinh_Buoi4.Areas.Admin.Controllers
+namespace NguyenVanThinh_Buoi4.Areas.Employee.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)] // Yêu cầu quyền Admin
+    [Area("Employee")]
+    [Authorize(Roles = SD.Role_Employee)] // Yêu cầu quyền Admin
     public class ProductController : Controller
     {
         private readonly IProductRepository _productRepository;
@@ -21,7 +21,6 @@ namespace NguyenVanThinh_Buoi4.Areas.Admin.Controllers
             _productRepository = productRepository;
             _categoryRepository = categoryRepository;
         }
-
 
         // Hiển thị danh sách sản phẩm
         public async Task<IActionResult> Index()
@@ -116,24 +115,7 @@ namespace NguyenVanThinh_Buoi4.Areas.Admin.Controllers
             return View(product);
         }
 
-        // Hiển thị form xác nhận xóa sản phẩm
-        public async Task<IActionResult> Delete(int id)
-        {
-            var product = await _productRepository.GetByIdAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
-            return View(product);
-        }
-
-        // Xử lý xóa sản phẩm
-        [HttpPost, ActionName("DeleteConfirmed")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            await _productRepository.DeleteAsync(id);
-            return RedirectToAction(nameof(Index));
-        }
+       
 
         // Hàm lưu hình ảnh
         private async Task<string> SaveImage(IFormFile image)

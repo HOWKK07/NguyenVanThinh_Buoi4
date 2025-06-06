@@ -4,10 +4,10 @@ using NguyenVanThinh_Buoi4.Models;
 using NguyenVanThinh_Buoi4.Repositories;
 using System.Threading.Tasks;
 
-namespace NguyenVanThinh_Buoi4.Areas.Admin.Controllers
+namespace NguyenVanThinh_Buoi4.Areas.Employee.Controllers
 {
-    [Area("Admin")]
-    [Authorize(Roles = SD.Role_Admin)] // Yêu cầu quyền Admin
+    [Area("Employee")]
+    [Authorize(Roles = SD.Role_Employee)] // Yêu cầu quyền Admin
     public class CategoryController : Controller
     {
         private readonly ICategoryRepository _categoryRepository;
@@ -17,7 +17,6 @@ namespace NguyenVanThinh_Buoi4.Areas.Admin.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        
         // Hiển thị danh sách danh mục
         public async Task<IActionResult> Index()
         {
@@ -66,24 +65,7 @@ namespace NguyenVanThinh_Buoi4.Areas.Admin.Controllers
             return View(category);
         }
 
-        // Hiển thị xác nhận xóa danh mục
-        public async Task<IActionResult> Delete(int id)
-        {
-            var category = await _categoryRepository.GetByIdAsync(id);
-            if (category == null)
-            {
-                return NotFound();
-            }
-            return View(category);
-        }
 
-        // Xử lý xóa danh mục
-        [HttpPost, ActionName("DeleteConfirmed")]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            await _categoryRepository.DeleteAsync(id);
-            return RedirectToAction("Index");
-        }
 
         // Hiển thị danh mục
         public async Task<IActionResult> Display(int id)
