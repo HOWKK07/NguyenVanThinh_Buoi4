@@ -1,0 +1,43 @@
+﻿@model IEnumerable<NguyenVanThinh_Buoi4.Models.Order>
+
+@{
+    ViewData["Title"] = "Danh Sách Đơn Hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center my-4" style="font-size:2.5rem;">
+    <span style="font-size:2.5rem;">📋</span>
+    <span class="fw-bold" style="letter-spacing:1px;">Danh Sách Đơn Hàng</span>
+</h2>
+
+<div class="table-responsive">
+    <table class="table table-bordered align-middle shadow-sm" style="background:#fff;">
+        <thead style="background:#e3f0ff;">
+            <tr class="text-center">
+                <th class="fw-bold" style="font-size:1.2rem;">ID Order</th>
+                <th class="fw-bold" style="font-size:1.2rem;">Khách hàng</th>
+                <th class="fw-bold" style="font-size:1.2rem;">Email</th>
+                <th class="fw-bold" style="font-size:1.2rem;">Ngày đặt</th>
+                <th class="fw-bold" style="font-size:1.2rem;">Tổng tiền</th>
+                <th class="fw-bold" style="font-size:1.2rem;">Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="text-center">
+                    <td>@item.Id</td>
+                    <td>@item.ApplicationUser?.FullName</td>
+                    <td>@item.ApplicationUser?.Email</td>
+                    <td>@item.OrderDate.ToString("dd/MM/yyyy HH:mm:ss")</td>
+                    <td class="fw-bold">@item.TotalPrice.ToString("N2")</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info text-white fw-bold" style="min-width:140px;">
+                            <span style="font-size:1.2rem;">📄</span> Xem Chi Tiết
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

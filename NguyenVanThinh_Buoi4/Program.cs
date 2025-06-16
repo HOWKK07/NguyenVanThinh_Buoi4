@@ -4,6 +4,14 @@ using NguyenVanThinh_Buoi4.Models;
 using NguyenVanThinh_Buoi4.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+// Đặt trước AddControllersWithViews();
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 // Đăng ký dịch vụ
 builder.Services.AddControllersWithViews();
@@ -35,6 +43,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseStaticFiles();
+app.UseSession();
 app.UseRouting();
 
 app.UseAuthentication();

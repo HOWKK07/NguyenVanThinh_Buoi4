@@ -1,0 +1,67 @@
+﻿@model ShoppingCart
+
+@{
+    ViewData["Title"] = "Giỏ Hàng";
+}
+
+<h2 class="text-center my-4" style="font-size:2rem;">
+    <span style="font-size:2rem;">🛒</span> Giỏ Hàng Của Bạn
+</h2>
+
+@if (Model.Items == null || !Model.Items.Any())
+{
+    <div class="alert alert-info text-center">
+        <span style="font-size:1.5rem;">🛍️</span> Giỏ hàng của bạn đang trống.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle shadow-sm bg-white">
+            <thead class="table-primary text-center">
+                <tr>
+                    <th style="width:5%;">#</th>
+                    <th style="width:35%;">Tên sản phẩm</th>
+                    <th style="width:15%;">Số lượng</th>
+                    <th style="width:15%;">Giá</th>
+                    <th style="width:15%;">Thành tiền</th>
+                    <th style="width:15%;">Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int stt = 1;
+                    decimal tongTien = 0;
+                }
+                @foreach (var item in Model.Items)
+                {
+                    var thanhTien = item.Price * item.Quantity;
+                    tongTien += thanhTien;
+                    <tr class="text-center">
+                        <td>@stt</td>
+                        <td class="text-start">@item.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Price.ToString("N2")</td>
+                        <td class="fw-bold">@thanhTien.ToString("N2")</td>
+                        <td>
+                            <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId"
+                               class="btn btn-danger btn-sm rounded-pill px-3 shadow-sm">
+                                <span style="font-size:1.1rem;">🗑️</span> Xóa
+                            </a>
+                        </td>
+                    </tr>
+                    stt++;
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="d-flex justify-content-between align-items-center mt-4">
+        <div class="fs-4" style="color:#d32f2f;">
+            <span style="font-size:1.5rem;">💰</span>
+            <b>Tổng tiền: @tongTien.ToString("N2")</b>
+        </div>
+        <a asp-action="Checkout" class="btn btn-success btn-lg fw-bold shadow-sm">
+            <span style="font-size:1.2rem;">🛒</span> Tới trang thanh toán
+        </a>
+    </div>
+}

@@ -20,3 +20,29 @@ html {
 body {
   margin-bottom: 60px;
 }
+.product-card {
+    border-radius: 25px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    background: #fff;
+}
+
+    .product-card:hover {
+        transform: translateY(-8px) scale(1.03);
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+.product-img {
+    height: 220px;
+    object-fit: cover;
+    border-radius: 18px 18px 0 0;
+}
+
+.add-cart-btn {
+    transition: background 0.2s, color 0.2s;
+}
+
+    .add-cart-btn:hover {
+        background: #212529;
+        color: #fff;
+    }
