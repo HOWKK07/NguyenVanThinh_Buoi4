@@ -1,0 +1,19 @@
+﻿@model IEnumerable<NguyenVanThinh_Buoi4.Models.Category>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="categoryDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="bi bi-tags"></i> Danh mục
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+        <li>
+            <a class="dropdown-item" asp-area="Customer" asp-controller="Product" asp-action="Index">Tất cả sản phẩm</a>
+        </li>
+        @foreach (var category in Model)
+        {
+            <li>
+                <a class="dropdown-item" asp-area="Customer" asp-controller="Product" asp-action="Index" asp-route-categoryId="@category.Id">
+                    @category.Name
+                </a>
+            </li>
+        }
+    </ul>
+</li>

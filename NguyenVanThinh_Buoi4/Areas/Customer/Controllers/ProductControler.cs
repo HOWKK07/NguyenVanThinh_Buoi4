@@ -6,6 +6,7 @@ using NguyenVanThinh_Buoi4.Repositories;
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace NguyenVanThinh_Buoi4.Areas.Customer.Controllers
 {
@@ -23,9 +24,13 @@ namespace NguyenVanThinh_Buoi4.Areas.Customer.Controllers
         }
 
         // Hiển thị danh sách sản phẩm
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? categoryId)
         {
             var products = await _productRepository.GetAllAsync();
+            if (categoryId.HasValue)
+            {
+                products = products.Where(p => p.CategoryId == categoryId.Value);
+            }
             return View(products);
         }
 
