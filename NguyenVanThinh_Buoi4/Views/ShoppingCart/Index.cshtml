@@ -40,12 +40,22 @@ else
                     <tr class="text-center">
                         <td>@stt</td>
                         <td class="text-start">@item.Name</td>
-                        <td>@item.Quantity</td>
+                        <td>
+                            <form asp-action="UpdateQuantity" method="post" class="d-flex justify-content-center align-items-center" style="gap: 0.5rem;">
+                                <input type="hidden" name="productId" value="@item.ProductId" />
+                                <div class="input-group" style="width: 110px;">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="Giảm số lượng" onclick="changeQuantity(this, -1)">-</button>
+                                    <input type="number" name="quantity" value="@item.Quantity" min="1" max="99" class="form-control text-center" style="width: 50px;" />
+                                    <button type="button" class="btn btn-outline-secondary btn-sm" aria-label="Tăng số lượng" onclick="changeQuantity(this, 1)">+</button>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-sm ms-2">Cập nhật</button>
+                            </form>
+                        </td>
                         <td>@item.Price.ToString("N2")</td>
                         <td class="fw-bold">@thanhTien.ToString("N2")</td>
                         <td>
                             <a asp-action="RemoveFromCart" asp-route-productId="@item.ProductId"
-                               class="btn btn-danger btn-sm rounded-pill px-3 shadow-sm">
+                               class="btn btn-danger btn-sm rounded-pill px-3 shadow-sm" aria-label="Xóa sản phẩm">
                                 <span style="font-size:1.1rem;">🗑️</span> Xóa
                             </a>
                         </td>
@@ -64,4 +74,17 @@ else
             <span style="font-size:1.2rem;">🛒</span> Tới trang thanh toán
         </a>
     </div>
+}
+
+@section Scripts {
+    <script>
+        function changeQuantity(btn, delta) {
+            var input = btn.parentElement.querySelector('input[type="number"]');
+            var value = parseInt(input.value) || 1;
+            value += delta;
+            if (value < 1) value = 1;
+            if (value > 99) value = 99;
+            input.value = value;
+        }
+    </script>
 }

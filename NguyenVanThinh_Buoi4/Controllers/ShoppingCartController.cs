@@ -143,5 +143,21 @@ namespace NguyenVanThinh_Buoi4.Controllers
             //Đi về cái trang thông báo đặt hàng thành công
             return View("OrderCompleted", order.Id); // Trang xác nhận hoàn thành đơn hàng
         }
+
+        [HttpPost]
+        public IActionResult UpdateQuantity(int productId, int quantity)
+        {
+            var cart = HttpContext.Session.GetObjectFromJson<ShoppingCart>("Cart");
+            if (cart != null)
+            {
+                var item = cart.Items.FirstOrDefault(i => i.ProductId == productId);
+                if (item != null)
+                {
+                    item.Quantity = quantity < 1 ? 1 : (quantity > 99 ? 99 : quantity);
+                    HttpContext.Session.SetObjectAsJson("Cart", cart);
+                }
+            }
+            return RedirectToAction("Index");
+        }
     }
 }

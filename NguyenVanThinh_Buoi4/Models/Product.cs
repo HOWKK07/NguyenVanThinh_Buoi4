@@ -24,5 +24,6 @@ namespace NguyenVanThinh_Buoi4.Models
             //CategoryID là khóa ngoại của bảng Category
             public int CategoryId { get; set; }
             public Category? Category { get; set; }
+            
     }
 }

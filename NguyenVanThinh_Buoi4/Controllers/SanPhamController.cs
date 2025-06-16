@@ -15,7 +15,7 @@ namespace NguyenVanThinh_Buoi4.Controllers
         {
             _productRepository = productRepository;
         }
-
+   
         public async Task<IActionResult> Index(string search)
         {
             var products = await _productRepository.GetAllAsync();
@@ -24,6 +24,17 @@ namespace NguyenVanThinh_Buoi4.Controllers
                 products = products.Where(p => p.Name.Contains(search, StringComparison.OrdinalIgnoreCase));
             }
             return View(products);
+        }
+
+        // Hiển thị chi tiết sản phẩm
+        public async Task<IActionResult> Display(int id)
+        {
+            var product = await _productRepository.GetByIdAsync(id);
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return View(product);
         }
     }
 }
