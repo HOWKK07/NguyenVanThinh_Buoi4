@@ -1,18 +1,23 @@
 using Microsoft.AspNetCore.Mvc;
 using NguyenVanThinh_Buoi4.Repositories;
-using System.Threading.Tasks;
 
-public class CategoryDropdownViewComponent : ViewComponent
+namespace NguyenVanThinh_Buoi4.ViewComponents
 {
-    private readonly ICategoryRepository _categoryRepository;
-    public CategoryDropdownViewComponent(ICategoryRepository categoryRepository)
-    {
-        _categoryRepository = categoryRepository;
-    }
 
-    public async Task<IViewComponentResult> InvokeAsync()
+
+    public class CategoryDropdownViewComponent : ViewComponent
     {
-        var categories = await _categoryRepository.GetAllAsync();
-        return View(categories);
+        private readonly ICategoryRepository _categoryRepository;
+
+        public CategoryDropdownViewComponent(ICategoryRepository categoryRepository)
+        {
+            _categoryRepository = categoryRepository;
+        }
+
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var categories = await _categoryRepository.GetAllAsync();
+            return View(categories);
+        }
     }
 }

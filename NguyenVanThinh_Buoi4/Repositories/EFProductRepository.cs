@@ -34,11 +34,14 @@ namespace NguyenVanThinh_Buoi4.Repositories
                 .FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        /// <summary>
-        /// Thêm sản phẩm mới
-        /// </summary>
-        /// <param name="product"></param>
-        /// <returns></returns>
+        public async Task<IEnumerable<Product>> GetByCategoryIdAsync(int categoryId)
+        {
+            return await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.CategoryId == categoryId)
+                .ToListAsync();
+        }
+
         public async Task AddAsync(Product product)
         {
             _context.Products.Add(product);
